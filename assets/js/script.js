@@ -10,14 +10,14 @@ function inputIsValid() {
   return inputText.match(emailRegex); 
 }
 
-function changeWindow() {
+function changeWindow(email) {
   container.innerHTML = '';
   container.classList.add("newWindowContainer");
 
   const imgIcon = createEl("img");
-  imgIcon.setAttribute("src", "./assets/images/icon-success.svg");
+  imgIcon.setAttribute("src", `./assets/images/icon-success.svg`);
   const h1 = createEl("h1", `Thanks for <br>subscribing!`);
-  const p = createEl("p", `A confirmation email has been sent to <strong>ash@loremcompany.com</strong>. Please open it and click the button inside to confirm your subscription.`)
+  const p = createEl("p", `A confirmation email has been sent to <strong>${email}</strong>. Please open it and click the button inside to confirm your subscription.`)
   const button = createEl("button", `Dismiss message`);
   button.classList.add("btnStyle");
 
@@ -47,8 +47,9 @@ button.addEventListener("click", function(e) {
   e.preventDefault();
 
   if (inputIsValid()) {
-    console.log(inputIsValid());
-    changeWindow();
+    // console.log(inputIsValid());
+    const email = inputIsValid()[0];
+    changeWindow(email);
   } else {
     invalidInputStyle();
   }
